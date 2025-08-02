@@ -12,15 +12,11 @@ class LSTMForecaster(nn.Module):
         out, _ = self.lstm(x)
         return self.fc(out[:, -1, :])
 
-def train_forecaster(data: np.ndarray, seq_len: int, lr: float, epochs: int, save_path: str):
-    """
-    data: numpy array shape (T, features), first feature is target.
-    seq_len: length of input sequences.
-    """
+def train_forecaster(data, seq_len, lr, epochs, save_path):
     X, y = [], []
     for i in range(len(data) - seq_len):
-        X.append(data[i : i + seq_len])
-        y.append(data[i + seq_len, 0])
+        X.append(data[i:i+seq_len])
+        y.append(data[i+seq_len, 0])
     X = torch.tensor(np.stack(X), dtype=torch.float32)
     y = torch.tensor(y, dtype=torch.float32).unsqueeze(-1)
     ds = TensorDataset(X, y)
@@ -29,12 +25,7 @@ def train_forecaster(data: np.ndarray, seq_len: int, lr: float, epochs: int, sav
     opt = optim.Adam(model.parameters(), lr=lr)
     loss_fn = nn.MSELoss()
     for epoch in range(epochs):
-        total, count = 0.0, 0
         for xb, yb in dl:
-            pred = model(xb)
-            loss = loss_fn(pred, yb)
+            pred = model(xb); loss = loss_fn(pred, yb)
             opt.zero_grad(); loss.backward(); opt.step()
-            total += loss.item(); count += 1
-        print(f"Epoch {epoch+1}/{epochs} - Loss: {total/count:.4f}")
     torch.save(model.state_dict(), save_path)
-    print(f"Saved forecaster to {save_path}")
