@@ -1,15 +1,15 @@
-import yaml
+import os, yaml
 
-def load_api_key(path: str = "api_key.txt") -> str:
-    """Read OpenAI API key from a text file."""
-    with open(path, "r") as f:
+def load_api_key():
+    key = os.getenv("OPENAI_API_KEY")
+    if key:
+        return key.strip()
+    with open("api_key.txt", "r") as f:
         return f.read().strip()
 
-def load_schema_map(path: str = "mappings/schema_map.yaml") -> dict:
-    """Load the schema mapping configuration."""
-    with open(path, "r") as f:
+def load_schema_map():
+    with open("mappings/schema_map.yaml", "r") as f:
         return yaml.safe_load(f)
 
 OPENAI_API_KEY = load_api_key()
-SCHEMA_MAP = load_schema_map()
-
+SCHEMA_MAP = load_schema_map()["well_logs"]
