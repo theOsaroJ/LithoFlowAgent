@@ -1,5 +1,5 @@
 import openai
-from langchain import OpenAI
+from langchain.llms import OpenAI
 from langchain.agents import Tool, initialize_agent, AgentType
 from config import OPENAI_API_KEY
 from agent.tools import IngestLogsTool, ImputeLogsTool, ForecastTool, RetrieveDocsTool
@@ -28,5 +28,4 @@ agent = initialize_agent(
 )
 
 def run_agent(prompt: str) -> str:
-    """Run the agent on a user prompt."""
     return agent.run(prompt)
