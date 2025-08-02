@@ -12,3 +12,4 @@ def load_schema_map(path: str = "mappings/schema_map.yaml") -> dict:
 
 OPENAI_API_KEY = load_api_key()
 SCHEMA_MAP = load_schema_map()
+
