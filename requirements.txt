@@ -1,5 +1,6 @@
 # Core
 langchain>=0.0.200
+langchain_community
 openai
 faiss-cpu
 sentence-transformers
