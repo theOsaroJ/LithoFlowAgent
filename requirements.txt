@@ -1,0 +1,24 @@
+# Core
+langchain>=0.0.200
+openai
+faiss-cpu
+sentence-transformers
+fastapi
+uvicorn[standard]
+
+# Data handling
+pandas
+numpy
+lasio
+
+# Modeling
+scikit-learn
+xgboost
+torch
+torchvision
+
+# Utilities
+pyyaml
+python-dotenv
+joblib
+requests
