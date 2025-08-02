@@ -1,18 +1,12 @@
-import pandas as pd
-from xgboost import XGBRegressor
 import joblib
+from xgboost import XGBRegressor
 
-def train_imputer(df: pd.DataFrame, target_cols: list[str], feature_cols: list[str], out_path: str):
-    """
-    Train an XGBoost regressor for each target column using specified features.
-    Saves a dict of trained models to `out_path`.
-    """
+def train_imputer(df, target_cols, feature_cols, out_path):
     models = {}
     for tgt in target_cols:
         train = df.dropna(subset=[tgt] + feature_cols)
         X, y = train[feature_cols], train[tgt]
-        model = XGBRegressor(n_estimators=100, tree_method="hist")
-        model.fit(X, y)
-        models[tgt] = model
+        m = XGBRegressor(n_estimators=100, tree_method="hist")
+        m.fit(X, y)
+        models[tgt] = m
     joblib.dump(models, out_path)
-    print(f"Saved imputer models to {out_path}")
