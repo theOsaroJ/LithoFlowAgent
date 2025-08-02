@@ -1,17 +1,18 @@
-# Core
-langchain>=0.0.200
-langchain-openai
-langchain_community
-openai
-faiss-cpu
-sentence-transformers
+# Web & API
 fastapi
 uvicorn[standard]
+
+# LLM & Agent
+langchain>=0.0.200
+langchain-openai
+faiss-cpu
+sentence-transformers
 
 # Data handling
 pandas
 numpy
 lasio
+pyyaml
 
 # Modeling
 scikit-learn
@@ -20,7 +21,5 @@ torch
 torchvision
 
 # Utilities
-pyyaml
 python-dotenv
 joblib
-requests
