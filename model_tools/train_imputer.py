@@ -4,7 +4,7 @@ import joblib
 
 def train_imputer(df: pd.DataFrame, target_cols: list[str], feature_cols: list[str], out_path: str):
     """
-    Train an XGBoost regressor for each target column using the specified features.
+    Train an XGBoost regressor for each target column using specified features.
     Saves a dict of trained models to `out_path`.
     """
     models = {}
