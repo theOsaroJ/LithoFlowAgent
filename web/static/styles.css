@@ -1,0 +1,20 @@
+:root {
+  --bg: #f7f9fc;
+  --user: #4b8bbe;
+  --agent: #30475e;
+  --white: #fff;
+  --font: 'Segoe UI', sans-serif;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); font-family:var(--font); display:flex; justify-content:center; align-items:center; height:100vh;}
+.chat-container { display:grid; grid-template-rows:auto 1fr auto; width:100%; max-width:600px; height:90vh; border:1px solid #ccc; border-radius:8px; background:var(--white); overflow:hidden;}
+.chat-header { padding:1rem; background:var(--agent); color:var(--white); text-align:center; font-size:1.25rem;}
+.chat-log { padding:1rem; overflow-y:auto; display:grid; grid-auto-rows:min-content; gap:0.75rem;}
+.chat-log .message { max-width:80%; padding:0.75rem 1rem; border-radius:16px; line-height:1.4; }
+.chat-log .user { justify-self:end; background:var(--user); color:var(--white); border-bottom-right-radius:4px;}
+.chat-log .agent { justify-self:start; background:var(--agent); color:var(--white); border-bottom-left-radius:4px;}
+.chat-input { display:flex; border-top:1px solid #ddd;}
+.chat-input input { flex:1; padding:1rem; border:none; font-size:1rem;}
+.chat-input button { background:var(--agent); color:var(--white); border:none; padding:1rem; cursor:pointer; font-size:1.2rem;}
+.chat-input input:focus, .chat-input button:focus { outline:2px solid var(--user);}
