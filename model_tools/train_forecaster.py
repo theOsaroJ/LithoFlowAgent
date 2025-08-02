@@ -14,7 +14,7 @@ class LSTMForecaster(nn.Module):
 
 def train_forecaster(data: np.ndarray, seq_len: int, lr: float, epochs: int, save_path: str):
     """
-    data: numpy array of shape (T, features). The first feature is the target.
+    data: numpy array shape (T, features), first feature is target.
     seq_len: length of input sequences.
     """
     X, y = [], []
@@ -33,11 +33,8 @@ def train_forecaster(data: np.ndarray, seq_len: int, lr: float, epochs: int, sav
         for xb, yb in dl:
             pred = model(xb)
             loss = loss_fn(pred, yb)
-            opt.zero_grad()
-            loss.backward()
-            opt.step()
-            total += loss.item()
-            count += 1
+            opt.zero_grad(); loss.backward(); opt.step()
+            total += loss.item(); count += 1
         print(f"Epoch {epoch+1}/{epochs} - Loss: {total/count:.4f}")
     torch.save(model.state_dict(), save_path)
     print(f"Saved forecaster to {save_path}")
