@@ -10,8 +10,7 @@ class Query(BaseModel):
 @app.post("/ask")
 async def ask(query: Query):
     try:
-        response = run_agent(query.prompt)
-        return {"response": response}
+        return {"response": run_agent(query.prompt)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
