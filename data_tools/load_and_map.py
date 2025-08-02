@@ -15,7 +15,6 @@ def _read_file(path: str) -> pd.DataFrame:
         return df
     else:
         df = pd.read_csv(path)
-        # Normalize common depth column names
         for src in ["DEPTH", "depth_m", "dept"]:
             if src in df.columns:
                 df = df.rename(columns={src: "DEPT"})
@@ -25,14 +24,11 @@ def _read_file(path: str) -> pd.DataFrame:
 def apply_schema_map(df: pd.DataFrame, domain: str = "well_logs") -> pd.DataFrame:
     """Rename and scale columns according to the schema map."""
     mapping = SCHEMA_MAP.get(domain, {})
-    # Rename columns
     rename_dict = {src: cfg["name"] for src, cfg in mapping.items()}
     df_renamed = df.rename(columns=rename_dict)
-    # Detect unmapped columns
     unmapped = set(df_renamed.columns) - set(cfg["name"] for cfg in mapping.values())
     if unmapped:
         logger.warning(f"Unmapped columns detected: {sorted(unmapped)}")
-    # Apply scaling and offset
     for src, cfg in mapping.items():
         tgt = cfg["name"]
         if tgt in df_renamed.columns:
