@@ -1,5 +1,4 @@
 well_logs:
-  # Depth columns
   DEPTH:
     name: DEPT
     scale: 1.0
@@ -8,22 +7,14 @@ well_logs:
     name: DEPT
     scale: 1.0
     offset: 0.0
-  dept:
-    name: DEPT
-    scale: 1.0
-    offset: 0.0
-
-  # Gamma-ray curves
-  "GR (API)":
-    name: GR
-    scale: 1.0
-    offset: 0.0
   GammaRay:
     name: GR
     scale: 1.0
     offset: 0.0
-
-  # Bulk density / RHOB
+  "GR (API)":
+    name: GR
+    scale: 1.0
+    offset: 0.0
   RHOB:
     name: RHOB
     scale: 1.0
